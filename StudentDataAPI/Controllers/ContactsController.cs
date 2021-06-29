@@ -61,6 +61,7 @@ namespace StudentDataAPI.Controllers
         [Route("Contacts/Save")]
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Save([FromBody] Contact contact)
+
         {
             if (ModelState.IsValid)
             {
