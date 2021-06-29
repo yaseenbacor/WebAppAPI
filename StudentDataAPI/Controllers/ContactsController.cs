@@ -25,11 +25,11 @@ namespace StudentDataAPI.Controllers
         //[Route("Contacts")]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Contacts.ToListAsync());
+            return Json(await _context.Contacts.ToListAsync());
         }
 
         // GET: Contacts/Details/5
-        [Route("Contacts/Details/{id}")]
+        [Route("Contacts/Details")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -44,7 +44,7 @@ namespace StudentDataAPI.Controllers
                 return NotFound();
             }
 
-            return View(contact);
+            return Json(contact);
         }
 
         // GET: Contacts/Create
@@ -58,9 +58,9 @@ namespace StudentDataAPI.Controllers
         //To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Route("Contacts/Save/{contact}")]
+        [Route("Contacts/Save")]
         //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> Save([Bind("Id,Name,Address,City,State,PostalCode,Phone,Email")] Contact contact)
+        public async Task<IActionResult> Save([FromBody] Contact contact)
         {
             if (ModelState.IsValid)
             {
@@ -68,11 +68,11 @@ namespace StudentDataAPI.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(contact);
+            return Json(contact);
         }
 
         // GET: Contacts/Edit/5
-        [Route("Contacts/Edit/{id}")]
+        [Route("Contacts/Edit")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -85,15 +85,16 @@ namespace StudentDataAPI.Controllers
             {
                 return NotFound();
             }
-            return View(contact);
+            return Json(contact);
         }
 
         // POST: Contacts/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,City,State,PostalCode,Phone,Email")] Contact contact)
+        [Route("Contacts/Edit")]
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [FromBody] Contact contact)
         {
             if (id != contact.Id)
             {
@@ -120,11 +121,11 @@ namespace StudentDataAPI.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(contact);
+            return Json(contact);
         }
 
         //// GET: Contacts/Delete/5
-        [Route("Contacts/Delete/{id}")]
+        [Route("Contacts/Delete")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -139,7 +140,7 @@ namespace StudentDataAPI.Controllers
                 return NotFound();
             }
 
-            return View(contact);
+            return Json(contact);
         }
 
         // POST: Contacts/Delete/5
