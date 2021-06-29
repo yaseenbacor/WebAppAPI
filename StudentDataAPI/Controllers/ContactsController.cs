@@ -59,7 +59,7 @@ namespace StudentDataAPI.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [Route("Contacts/Save/{contact}")]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Save([Bind("Id,Name,Address,City,State,PostalCode,Phone,Email")] Contact contact)
         {
             if (ModelState.IsValid)
